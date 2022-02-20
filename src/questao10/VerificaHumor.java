@@ -6,20 +6,17 @@ public class VerificaHumor {
 		humor += " ";
 		int divertido = 0;
 		int chateado = 0;
-		
-		
-		if(humor.contains(":-)")) {
+
+		if (humor.contains(":-)")) {
 			String[] lista = humor.split(":-\\)");
 			divertido = lista.length - 1;
-			System.out.println(divertido);
 		}
-		if(humor.contains(":-(")) {
+		if (humor.contains(":-(")) {
 			String[] lista2 = humor.split(":-\\(");
 			chateado = lista2.length - 1;
-			System.out.println(chateado);
 		}
-		
-		if(divertido > 0 || chateado > 0) {
+
+		if (divertido > 0 || chateado > 0) {
 			if (divertido > chateado) {
 				return "Divertido";
 			} else if (divertido == chateado) {

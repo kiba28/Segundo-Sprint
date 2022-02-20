@@ -2,7 +2,6 @@ package questao9;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -85,21 +84,17 @@ public class ControleDeOfertas {
 				scan.nextLine();
 				String palavra = scan.nextLine();
 
-				List<Produto> listProd = produtoDao.findAll();
-				List<Produto> resultado = new ArrayList<Produto>();
+				List<Produto> listProd = produtoDao.findByWord(palavra);
 
-				for (Produto produto : listProd) {
-					if (produto.getNome().contains(palavra)) {
-						resultado.add(produto);
-					}
-				}
-				if (resultado.size() > 0) {
-					for (Produto produto : resultado) {
+				if (listProd.size() > 0) {
+					for (Produto produto : listProd) {
 						System.out.println(produto.toString());
 					}
 				} else {
 					System.out.println("Nenhuma oferta com esta palavra.");
 				}
+
+				break;
 			}
 
 			case 0: {

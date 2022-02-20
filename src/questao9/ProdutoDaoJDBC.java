@@ -140,6 +140,32 @@ public class ProdutoDaoJDBC implements ProdutoDao {
 		}
 	}
 
+	public List<Produto> findByWord(String word) {
+		PreparedStatement st = null;
+		ResultSet rs = null;
+
+		try {
+			st = conn.prepareStatement("SELECT * FROM produto WHERE nome LIKE ?");
+
+			st.setString(1, '%' + word + '%');
+			rs = st.executeQuery();
+
+			List<Produto> list = new ArrayList<Produto>();
+
+			while (rs.next()) {
+				Produto prod = instantiateProduto(rs);
+				list.add(prod);
+			}
+			return list;
+
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		} finally {
+			DB.closeResultSet(rs);
+			DB.closeStatement(st);
+		}
+	}
+
 	private Produto instantiateProduto(ResultSet rs) throws SQLException {
 		return new Produto(rs.getInt("id"), rs.getString("nome"), rs.getString("descricao"), rs.getDouble("desconto"),
 				rs.getDate("data_inicio"));

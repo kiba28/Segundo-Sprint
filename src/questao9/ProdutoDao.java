@@ -13,4 +13,6 @@ public interface ProdutoDao {
 	Produto findById(Integer id);
 
 	List<Produto> findAll();
+	
+	List<Produto> findByWord(String word);
 }
